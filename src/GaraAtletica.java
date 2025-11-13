@@ -4,8 +4,8 @@ public class GaraAtletica {
         Giudice giudice= new Giudice();
 
 
-        Atleta a1 = new Atleta(67, "Federico",giudice);
-        Atleta a2 = new Atleta(68, "Alessandro",giudice);
+        Atleta a1 = new Atleta(67, "Pacchiu",giudice);
+        Atleta a2 = new Atleta(68, "Pacchioso",giudice);
         Thread ta2 = new Thread(a2);
         ta2.setPriority(10);
         Thread ta1 = new Thread(a1);
