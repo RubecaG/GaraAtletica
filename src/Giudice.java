@@ -1,50 +1,49 @@
+
 import java.util.ArrayList;
 
+public class Giudice {
 
-public class Giudice extends Thread {
-    static int numero;
-    static ArrayList<Atleta> Atleti = new ArrayList<>();
-    static ArrayList<Atleta> Podio = new ArrayList<>();
-//      static ArrayList<Thread> threadAtleti = new ArrayList<>();
+    private static final ArrayList<Atleta> Atleti = new ArrayList<>();
+    private static final ArrayList<Atleta> Podio = new ArrayList<>();
 
+    private static final Object lockPodio = new Object();
 
- public Giudice() { }
-
-
-    public static void aggiungimi(Atleta a) {
+    public static synchronized void aggiungimi(Atleta a) {
         Atleti.add(a);
     }
 
-
     public static void finito(Atleta a) {
-        Podio.add(a);
-        if (Podio.size() == Atleti.size()) Giudice.fineGara();
-    }
+        synchronized (lockPodio) {
+            Podio.add(a);
 
+            if (Podio.size() == Atleti.size()) {
+                fineGara();
+            }
+        }
+    }
 
     public static void fineGara() {
-        System.out.println("Gara Terminata! Ecco il Podio:");
-        System.out.println("Primo in classifica: " + Podio.get(0).nome);
-        System.out.println("Secondo in classifica: " + Podio.get(1).nome);
-        System.out.println("Terzo in classifica: " + Podio.get(2).nome);
-    }
+        System.out.println("\n Gara Terminata! Podio:");
 
+        for (int i = 0; i < Podio.size(); i++) {
+            Atleta a = Podio.get(i);
+            System.out.println((i+1) + "° posto: " + a.nome);
+
+            gestoreFile.salvaPodio((i+1) + "°: " + a.nome);
+        }
+    }
 
     public static void avviaGara() {
         for (int i = 3; i > 0; i--) {
-            System.out.println("Inizio in " + i);
-            try { Thread.currentThread().sleep(1000); }
-            catch (InterruptedException e) { System.err.println("Errore sleep"); }
+            System.out.println("Partenza tra " + i);
+            try { Thread.sleep(1000); }
+            catch (InterruptedException e) { }
         }
-
 
         System.out.println("VIA!!!");
 
-
         for (Atleta a : Atleti) {
-            (new Thread(a)).start();
-//              threadAtleti.add(new Thread(a));
-//              threadAtleti.getLast().start();
+            new Thread(a).start();
         }
     }
 }

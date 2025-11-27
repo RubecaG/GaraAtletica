@@ -3,9 +3,9 @@ public class GaraAtletica {
         System.out.println("Gara Atletica");
 
 
-        new Atleta(67, "babis");
-        new Atleta(68, "mumus");
-        new Atleta(69, "piro");
+        new Atleta(67, "pacchiu(04)");
+        new Atleta(68, "pacchioso(32)");
+        new Atleta(69, "pirotecnico(12)");
 
 
         Giudice.avviaGara();
