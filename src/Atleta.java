@@ -22,7 +22,7 @@ public class Atleta implements Runnable {
                 metri += rand.nextDouble(10);
             }
 
-            System.out.println(nome + " ha percorso " + metri);
+            System.out.printf("%s ha percorso %.2f \n", nome, metri);
 
             try { Thread.sleep(800); }
             catch (InterruptedException e) { }
@@ -31,6 +31,10 @@ public class Atleta implements Runnable {
         Giudice.finito(this);
     }
 }
+
+
+
+
 
 
 

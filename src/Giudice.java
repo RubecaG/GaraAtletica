@@ -25,12 +25,14 @@ public class Giudice {
     public static void fineGara() {
         System.out.println("\n Gara Terminata! Podio:");
 
+        gestoreFile.svuotaFile();
         for (int i = 0; i < Podio.size(); i++) {
             Atleta a = Podio.get(i);
             System.out.println((i+1) + "° posto: " + a.nome);
 
             gestoreFile.salvaPodio((i+1) + "°: " + a.nome);
         }
+        System.out.println("\nPodio vecchio salvato sul file");
     }
 
     public static void avviaGara() {
@@ -47,4 +49,3 @@ public class Giudice {
         }
     }
 }
-
